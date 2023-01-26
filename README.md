@@ -1,9 +1,16 @@
 # HYSP
 
-This repository provides the Official PyTorch implementation of the paper "Hyperbolic Self-paced Learning for Self-supervised Skeleton-based Action Representations" (ICLR 2023).
+This repository provides the Official PyTorch implementation of the paper **"Hyperbolic Self-paced Learning for Self-supervised Skeleton-based Action Representations"** (ICLR 2023).
 
-Luca Franco, Paolo Mandica, Bharti Munjal, Fabio Galasso  
-Sapienza University of Rome
+*Luca Franco, Paolo Mandica, Bharti Munjal, Fabio Galasso  
+Sapienza University of Rome*
+
+--- 
+
+<p align="center">
+<img src=".github/model.png" width=100% height=100% 
+class="center">
+</p>
 
 
 ## Requirements
@@ -71,3 +78,11 @@ The framework of our code is extended from the following repositories. We sincer
 ## Licence
 
 This project is licensed under the terms of the MIT license.
+
+## Citation
+
+If you find this repository useful, please consider giving a star :star: and citation:
+
+```
+INSERT CITATION
+```
