@@ -1,0 +1,72 @@
+work_dir: checkpoints/simsiam/ntu60_xview_joint_hyper
+resume_from: None   # None | path
+weights: checkpoints/simsiam/ntu60_xview_joint/epoch-400.ckpt
+
+# training
+device: 8
+num_workers: 64
+batch_size: 512
+val_batch_size: 256
+num_epoch: 800
+stream: joint
+hyper: true
+precision: 32
+
+# optim
+nesterov: False
+weight_decay: 1e-4
+base_lr: 0.02
+optimizer: RiemannianSGD    # SGD | RiemannianSGD
+scheduler: step
+step: [1000]
+warmup_step: 10         # only with schedule = cosine
+
+# log
+log_interval: 25
+save_interval: 50
+eval_interval: -1
+
+wandb:
+  enable: true
+  name: SimSiam hyper - xview joint (weights ep. 400)
+  group: rebuttal
+  project: hysp
+  entity: pinlab-sapienza
+
+# model
+model: simsiam
+model_args:
+  pretrain: True
+  in_channels: 3
+  hidden_channels: 64
+  out_channels: 1024
+  projection_hidden_size: [1024,1024,1024]
+  predictor_hidden_size: [512,1024]
+  dropout: 0.5
+  graph_args:
+    layout: ntu-rgb+d
+    strategy: spatial
+  edge_importance_weighting: True
+  hyper_c: 1.
+
+# switch from euclidean to hyperbolic
+curriculum: true
+initial_hyper_epoch: 0
+final_hyper_epoch: 50
+
+# feeders
+train_feeder_args:
+  data_path: data/ntu60_frame50/xview/train_position.npy
+  label_path: data/ntu60_frame50/xview/train_label.pkl
+  shear_amplitude: 0.5
+  temperal_padding_ratio: 6
+  mmap: True
+  new_augs: False
+
+val_feeder_args:
+  data_path: ./data/ntu60_frame50/xview/val_position.npy
+  label_path: ./data/ntu60_frame50/xview/val_label.pkl
+  shear_amplitude: 0.5
+  temperal_padding_ratio: 6
+  mmap: True
+  new_augs: False

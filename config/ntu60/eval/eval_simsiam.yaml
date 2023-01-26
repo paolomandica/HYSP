@@ -1,0 +1,62 @@
+work_dir: checkpoints/simsiam/ntu60_xview_joint
+weights: checkpoints/simsiam/ntu60_xview_joint/epoch-750.ckpt
+ignore_weights: [online_projector, online_predictor, target_encoder, target_projector, queue]
+
+# training
+device: [0]
+batch_size: 256
+num_workers: 24
+test_batch_size: 128
+num_epoch: 100
+stream: joint     # joint | motion | bone
+protocol: linear    # linear | semi | supervised
+hyper: false
+precision: 16
+
+# optim
+nesterov: False
+weight_decay: 0.0
+base_lr: .1
+encoder_lr: 0.1
+optimizer: SGD
+step: [60, 80]
+
+# model
+model: simsiam
+model_args:
+  pretrain: False
+  base_encoder: stgcn
+  in_channels: 3
+  hidden_channels: 64
+  out_channels: 1024
+  num_classes: 60
+  graph_args:
+    layout: ntu-rgb+d
+    strategy: spatial
+  edge_importance_weighting: True
+  hyper_c: 1.
+
+# log
+save_interval: -1
+eval_interval: 5
+
+# wandb
+wandb:
+  enable: False
+  name: HYSP - eval
+  group: dev
+  project: hysp
+
+# feeder
+train_feeder_args:
+  data_path: ./data/ntu60_frame50/xview/train_position.npy
+  label_path: ./data/ntu60_frame50/xview/train_label.pkl
+  shear_amplitude: -1
+  temperal_padding_ratio: -1
+  mmap: True
+test_feeder_args:
+  data_path: ./data/ntu60_frame50/xview/val_position.npy
+  label_path: ./data/ntu60_frame50/xview/val_label.pkl
+  shear_amplitude: -1
+  temperal_padding_ratio: -1
+  mmap: True

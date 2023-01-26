@@ -1,0 +1,12 @@
+--extra-index-url https://download.pytorch.org/whl/cu116
+torch
+--extra-index-url https://download.pytorch.org/whl/cu116
+torchvision
+pytorch-lightning
+lightning-flash
+geoopt
+imageio
+scikit-learn
+autopep8
+opencv-python
+wandb
