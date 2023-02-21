@@ -2,8 +2,9 @@
 
 This repository provides the Official PyTorch implementation of the paper **"Hyperbolic Self-paced Learning for Self-supervised Skeleton-based Action Representations"** (ICLR 2023).
 
-*Luca Franco, Paolo Mandica, Bharti Munjal, Fabio Galasso  
-Sapienza University of Rome*
+*Luca Franco <sup>&dagger; 1</sup>, Paolo Mandica <sup>&dagger; 1</sup>, Bharti Munjal <sup>1,2</sup>, Fabio Galasso<sup>1</sup>*  
+*<sup>1</sup> Sapienza University of Rome, <sup>2</sup> Technical University of Munich*  
+<sup>&dagger;</sup> Equal contribution
 
 --- 
 
@@ -20,8 +21,14 @@ class="center">
 
 ## Environment Setup
 
+1. Create conda environment and activate it
 ```bash
-# Install requirements using pip
+conda create -n hysp python=3.9
+conda activate hysp
+```
+
+2. Install requirements using pip inside the conda env
+```bash
 pip install -r requirements.txt
 ```
 
@@ -36,10 +43,9 @@ pip install -r requirements.txt
 
 ## Self-supervised Pre-Training
 
-Example for self-supervised pre-training. You can change hyperparameters through `.yaml` files in `config/DATASET/pretext` folder.
+Example of self-supervised pre-training on NTU-60 xview. You can change the hyperparameters by modifying the `.yaml` files in the `config/DATASET/pretext` folder.
 
 ```bash
-# example of pre-training on NTU-60 xview dataset
 python main_pretrain.py --config config/ntu60/pretext/pretext_xview.yaml
 ```
 
@@ -50,10 +56,9 @@ torchrun --standalone --nproc_per_node=NUM_GPUS main_pretrain.py --config config
 
 ## Evaluation
 
-Example for evaluation. You can change hyperparameters through `.yaml` files in `config/DATASET/eval` folder. For example, you can set the `protocol` to `linear`, `semi` or `supervised` depending on the type of evaluation you want to perform.
+Example of evaluation of a model pre-trained on NTU-60 xview. You can change hyperparameters through `.yaml` files in `config/DATASET/eval` folder. For example, you can set the `protocol` to `linear`, `semi` or `supervised` depending on the type of evaluation you want to perform.
 
 ```bash
-# example of pre-training on NTU-60 xview dataset
 python main_eval.py --config config/ntu60/eval/eval_xview.yaml
 ```
 
