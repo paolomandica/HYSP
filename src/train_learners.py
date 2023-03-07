@@ -17,7 +17,7 @@ class BaseLearner(pl.LightningModule):
         self.cfg = cfg
         self.lr = cfg.lr
         self.lr_min = cfg.lr_min
-        self.metrics = HyperMetrics(c=cfg.hyper_c)
+        self.metrics = HyperMetrics(c=cfg.model_args.hyper_c)
 
     def configure_optimizers(self):
         if self.cfg.optimizer == 'SGD':
@@ -70,7 +70,7 @@ class BaseLearner(pl.LightningModule):
             self.model.update_moving_average()
 
     def log_metrics(self, q, k, prefix='train', on_epoch=True, sync_dist=True):
-        metrics_dict = self.metrics(q, k)
+        metrics_dict = self.metrics.compute(q, k)
 
         for key, value in metrics_dict.items():
             self.log(f'{prefix}/{key}', value.mean(), on_step=False, on_epoch=on_epoch, sync_dist=sync_dist)

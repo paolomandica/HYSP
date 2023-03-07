@@ -25,7 +25,7 @@ warmup_step: 10         # only with schedule = cosine
 # log
 log_interval: 25
 save_interval: 50
-eval_interval: -1
+eval_interval: 5
 
 wandb:
   enable: true

@@ -2,9 +2,9 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
-from src.net.utils.tgcn import ConvTemporalGraphical
-from src.net.utils.graph import Graph
-from src.net.utils.att_drop import Simam_Drop
+from src.net.gcn.tgcn import ConvTemporalGraphical
+from src.net.gcn.graph import Graph
+from src.net.gcn.att_drop import Simam_Drop
 
 
 class Model(nn.Module):

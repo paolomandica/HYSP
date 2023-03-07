@@ -100,7 +100,7 @@ class Feeder_double(Feeder):
 
         # processing
         data1 = self._strong_aug(data_numpy)
-        data2 = self._old_aug(data_numpy)
+        data2 = self._aug(data_numpy)
 
         return [data1, data2], label
 
