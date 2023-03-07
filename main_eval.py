@@ -3,14 +3,13 @@ import wandb
 from pathlib import Path
 
 import pytorch_lightning as pl
-import torchvision.datasets as datasets
 from pytorch_lightning.callbacks import ModelCheckpoint
 from pytorch_lightning.loggers import WandbLogger
 from torch.utils.data import DataLoader
 
 from src.feeder.ntu_feeder import Feeder_single
 from tools import load_config
-from src.net.eval_learners import EvalLearner
+from src.eval_learners import EvalLearner
 
 pl.seed_everything(123)
 

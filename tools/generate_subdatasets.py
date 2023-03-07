@@ -7,7 +7,7 @@ from numpy.lib.format import open_memmap
 
 from src.feeder.ntu_feeder import Feeder_single
 from src.net.hysp import HYSP
-from src.net.utils.tools import load_weights, Distances
+from src.net.utils.tools import load_weights, HyperMapper
 
 DATA_PATH = "data/ntu60_frame50/xview/train_position.npy"
 LABEL_PATH = "data/ntu60_frame50/xview/train_label.pkl"
@@ -34,13 +34,13 @@ def compute_radii():
     print("Computing radii...")
     dataloader = get_dataloader()
     model = load_model()
-    projector = Distances()
+    mapper = HyperMapper()
 
     id_to_uncertainty = {}
 
     for i, (data, _) in tqdm(enumerate(dataloader), total=len(dataloader)):
         emb = model.online_encoder(data.cuda())
-        emb_h = projector.project(emb)
+        emb_h = mapper.expmap(emb)
         uncertainty = 1 - torch.norm(emb_h, dim=-1)
         id_to_uncertainty[i] = uncertainty.item()
 

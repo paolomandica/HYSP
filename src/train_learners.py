@@ -8,7 +8,7 @@ from flash.core.optimizers import LARS
 from src.net.hysp import HYSP
 from src.net.simsiam import SimSiam
 from src.net.skeletonclr import HyperSkeletonCLR, SkeletonCLR
-from src.net.utils.tools import compute_metrics
+from src.net.utils.tools import HyperMetrics
 
 
 class BaseLearner(pl.LightningModule):
@@ -17,6 +17,7 @@ class BaseLearner(pl.LightningModule):
         self.cfg = cfg
         self.lr = cfg.lr
         self.lr_min = cfg.lr_min
+        self.metrics = HyperMetrics(c=cfg.hyper_c)
 
     def configure_optimizers(self):
         if self.cfg.optimizer == 'SGD':
@@ -69,17 +70,10 @@ class BaseLearner(pl.LightningModule):
             self.model.update_moving_average()
 
     def log_metrics(self, q, k, prefix='train', on_epoch=True, sync_dist=True):
-        euc_norm_x, euc_norm_y, radius_x, radius_y, ang_e, cosine_dist, poincare_dist, euc_dist = compute_metrics(
-            q, k, self.cfg.model_args.hyper_c)
+        metrics_dict = self.metrics(q, k)
 
-        self.log(f'{prefix}/euc_norm_online', euc_norm_x.mean(), on_step=False, on_epoch=on_epoch, sync_dist=True)
-        self.log(f'{prefix}/euc_norm_target', euc_norm_y.mean(), on_step=False, on_epoch=on_epoch, sync_dist=True)
-        self.log(f'{prefix}/radius_online', radius_x.mean(), on_step=False, on_epoch=on_epoch, sync_dist=True)
-        self.log(f'{prefix}/radius_target', radius_y.mean(), on_step=False, on_epoch=on_epoch, sync_dist=True)
-        self.log(f'{prefix}/ang_e', ang_e.mean(), on_step=False, on_epoch=on_epoch, sync_dist=True)
-        self.log(f'{prefix}/cosine_dist', cosine_dist.mean(), on_step=False, on_epoch=on_epoch, sync_dist=True)
-        self.log(f'{prefix}/poincare_dist', poincare_dist.mean(), on_step=False, on_epoch=on_epoch, sync_dist=True)
-        self.log(f'{prefix}/euc_dist', euc_dist.mean(), on_step=False, on_epoch=on_epoch, sync_dist=True)
+        for key, value in metrics_dict.items():
+            self.log(f'{prefix}/{key}', value.mean(), on_step=False, on_epoch=on_epoch, sync_dist=sync_dist)
 
 
 class TrainLearner(BaseLearner):

@@ -3,8 +3,9 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
-from src.net.st_gcn import Model as STGCN
-from src.net.utils.tools import weights_init, EMA, MLP, HyperCrossEntropyLoss
+from src.net.gcn.st_gcn import Model as STGCN
+from src.net.utils.losses import HyperCrossEntropyLoss
+from src.net.utils.tools import EMA, MLP, weights_init
 
 
 class SkeletonCLR(nn.Module):
@@ -133,7 +134,7 @@ class HyperSkeletonCLR(nn.Module):
         # self.online_projector.apply(weights_init)
 
         if self.pretrain:
-            self.loss = HyperCrossEntropyLoss(hyper_c=1., temperature=temperature)
+            self.loss = HyperCrossEntropyLoss(c=1., temperature=temperature)
 
             # TARGET branch
             self.target_encoder = self._no_grad_copy(self.online_encoder)

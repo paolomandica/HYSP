@@ -1,6 +1,5 @@
 import multiprocessing as mp
 import torch
-import wandb
 from pathlib import Path
 
 import pytorch_lightning as pl
@@ -9,7 +8,7 @@ from torch.utils.data import DataLoader
 
 from src.feeder.ntu_feeder import Feeder_double
 from tools import load_config, PeriodicCheckpoint
-from src.net.train_learners import TrainLearner, HyperTrainLearner
+from src.train_learners import TrainLearner, HyperTrainLearner
 
 pl.seed_everything(123)
 # torch.use_deterministic_algorithms(True)
@@ -69,8 +68,6 @@ if __name__ == '__main__':
     # init wandb logger
     wandb_logger = None
     if cfg.wandb.enable:
-        # if not hasattr(cfg.wandb, 'id'):
-        # cfg.wandb.id = wandb.util.generate_id()
         wandb_logger = WandbLogger(project=cfg.wandb.project, group=cfg.wandb.group,
                                    name=cfg.wandb.name, entity=cfg.wandb.entity,
                                    save_dir=cfg.wandb.save_dir)

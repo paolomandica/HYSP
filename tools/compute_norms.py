@@ -1,13 +1,10 @@
-import gc
 import torch
 import pickle
-import numpy as np
 from tqdm import tqdm
-from numpy.lib.format import open_memmap
 
 from src.feeder.ntu_feeder import Feeder_single
 from src.net.hysp import HYSP
-from src.net.utils.tools import load_weights, Distances
+from src.net.utils.tools import load_weights, HyperMapper
 
 DATA_PATH = "data/ntu60_frame50/xview/train_position.npy"
 LABEL_PATH = "data/ntu60_frame50/xview/train_label.pkl"
@@ -37,7 +34,7 @@ def compute_norms():
     print("Computing radii...")
     dataloader = get_dataloader()
     model = load_model()
-    projector = Distances()
+    mapper = HyperMapper()
 
     id_to_norms = {}
     embeds_z_h = torch.tensor([]).cuda()
@@ -46,8 +43,8 @@ def compute_norms():
     for _, (data, _) in tqdm(enumerate(dataloader), total=len(dataloader)):
         z = model.online_projector(model.online_encoder(data.cuda()))
         z_hat = model.target_projector(model.target_encoder(data.cuda()))
-        z_h = projector.project(z)
-        z_hat_h = projector.project(z_hat)
+        z_h = mapper.expmap(z)
+        z_hat_h = mapper.expmap(z_hat)
 
         embeds_z_h = torch.cat((embeds_z_h, z_h), dim=0)
         embeds_z_h_hat = torch.cat((embeds_z_h_hat, z_hat_h), dim=0)

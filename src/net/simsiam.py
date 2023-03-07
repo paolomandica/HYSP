@@ -1,7 +1,9 @@
 import torch.nn as nn
 
-from src.net.st_gcn import Model as STGCN
-from src.net.utils.tools import Distances, PositiveOnlyLoss, MLP
+from src.net.gcn.st_gcn import Model as STGCN
+from src.net.utils.losses import PositiveOnlyLoss
+from src.net.utils.hyperbolic import HyperMapper
+from src.net.utils.tools import MLP
 
 
 class SimSiam(nn.Module):
@@ -28,7 +30,7 @@ class SimSiam(nn.Module):
 
         else:
             self.online_projector = MLP(out_channels, [num_classes], self.hyper)
-            self.distances = Distances()
+            self.distances = HyperMapper()
 
     def forward(self, x, y=None, lambda_hyper=0.):
         assert not (
@@ -39,7 +41,7 @@ class SimSiam(nn.Module):
                 return self.online_projector(self.online_encoder(x))
             else:
                 emb = self.online_encoder(x)
-                emb = self.distances.project(emb)
+                emb = self.distances.expmap(emb)
                 return self.online_projector(emb)
 
         # compute query embeddings

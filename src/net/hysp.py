@@ -2,8 +2,10 @@ import torch
 import torch.nn as nn
 import copy
 
-from src.net.st_gcn import Model as STGCN
-from src.net.utils.tools import Distances, PositiveOnlyLoss, EMA, MLP
+from src.net.gcn.st_gcn import Model as STGCN
+from src.net.utils.losses import PositiveOnlyLoss
+from src.net.utils.hyperbolic import HyperMapper
+from src.net.utils.tools import EMA, MLP
 
 
 class HYSP(nn.Module):
@@ -39,7 +41,7 @@ class HYSP(nn.Module):
 
         else:
             self.online_projector = MLP(out_channels, [num_classes], self.hyper)
-            self.distances = Distances()
+            self.distances = HyperMapper()
 
     @torch.no_grad()
     def _no_grad_copy(self, net):
@@ -63,7 +65,7 @@ class HYSP(nn.Module):
                 return self.online_projector(emb)
             else:
                 emb = self.online_encoder(x)
-                emb = self.distances.project(emb)
+                emb = self.distances.expmap(emb)
                 return self.online_projector(emb)
 
         # compute query embeddings
