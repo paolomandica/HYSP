@@ -76,9 +76,7 @@ For **linear evaluation** you can set `precision: 16` in the config file, while 
 
 ## Acknowledgement
 
-The framework of our code is extended from the following repositories. We sincerely thank the authors for releasing the codes.
-- Some parts of our code are based on [AimCLR](https://github.com/levigty/aimclr).
-- The encoder is based on [ST-GCN](https://github.com/yysijie/st-gcn/blob/master/OLD_README.md).
+This project is based on the following open-source projects: [AimCLR](https://github.com/levigty/aimclr), [ST-GCN](https://github.com/yysijie/st-gcn/blob/master/OLD_README.md). We sincerely thank the authors for making the source code publicly available.
 
 ## Licence
 
@@ -88,6 +86,13 @@ This project is licensed under the terms of the MIT license.
 
 If you find this repository useful, please consider giving a star :star: and citation:
 
-```
-INSERT CITATION
+```latex
+@inproceedings{
+  franco2023hyperbolic,
+  title={Hyperbolic Self-paced Learning for Self-supervised Skeleton-based Action Representations},
+  author={Luca Franco and Paolo Mandica and Bharti Munjal and Fabio Galasso},
+  booktitle={The Eleventh International Conference on Learning Representations},
+  year={2023},
+  url={https://openreview.net/forum?id=3Bh6sRPKS3J}
+}
 ```
