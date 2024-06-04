@@ -8,6 +8,14 @@ This repository provides the Official PyTorch implementation of the paper **"Hyp
 
 --- 
 
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/hyperbolic-self-paced-learning-for-self/unsupervised-skeleton-based-action-2)](https://paperswithcode.com/sota/unsupervised-skeleton-based-action-2?p=hyperbolic-self-paced-learning-for-self)
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/hyperbolic-self-paced-learning-for-self/skeleton-based-action-recognition-on-pku-mmd)](https://paperswithcode.com/sota/skeleton-based-action-recognition-on-pku-mmd?p=hyperbolic-self-paced-learning-for-self)
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/hyperbolic-self-paced-learning-for-self/unsupervised-skeleton-based-action)](https://paperswithcode.com/sota/unsupervised-skeleton-based-action?p=hyperbolic-self-paced-learning-for-self)
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/hyperbolic-self-paced-learning-for-self/unsupervised-skeleton-based-action-1)](https://paperswithcode.com/sota/unsupervised-skeleton-based-action-1?p=hyperbolic-self-paced-learning-for-self)
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/hyperbolic-self-paced-learning-for-self/skeleton-based-action-recognition-on-ntu-rgbd-1)](https://paperswithcode.com/sota/skeleton-based-action-recognition-on-ntu-rgbd-1?p=hyperbolic-self-paced-learning-for-self)
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/hyperbolic-self-paced-learning-for-self/skeleton-based-action-recognition-on-ntu-rgbd)](https://paperswithcode.com/sota/skeleton-based-action-recognition-on-ntu-rgbd?p=hyperbolic-self-paced-learning-for-self)
+
+
 <p align="center">
 <img src=".github/model.png" width=100% height=100% 
 class="center">
