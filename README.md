@@ -1,6 +1,6 @@
 # HYSP
 
-This is the official PyTorch implementation of the ICLR 2023 paper [**Hyperbolic Self-paced Learning for Self-supervised Skeleton-based Action Representations**](https://arxiv.org/abs/2303.06242).
+This is the official PyTorch implementation of the **ICLR 2023** paper [**Hyperbolic Self-paced Learning for Self-supervised Skeleton-based Action Representations**](https://arxiv.org/abs/2303.06242).
 
 *Luca Franco <sup>&dagger; 1</sup>, Paolo Mandica <sup>&dagger; 1</sup>, Bharti Munjal <sup>1,2</sup>, Fabio Galasso<sup>1</sup>*  
 *<sup>1</sup> Sapienza University of Rome, <sup>2</sup> Technical University of Munich*  
