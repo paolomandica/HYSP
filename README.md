@@ -6,6 +6,8 @@ This is the official PyTorch implementation of the ICLR 2023 paper [**Hyperbolic
 *<sup>1</sup> Sapienza University of Rome, <sup>2</sup> Technical University of Munich*  
 <sup>&dagger;</sup> Equal contribution
 
+[[`arXiv`](https://arxiv.org/abs/2303.06242)][[`BibTeX`](#Citation)][[`OpenReview`](https://openreview.net/forum?id=3Bh6sRPKS3J)]
+
 --- 
 
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/hyperbolic-self-paced-learning-for-self/unsupervised-skeleton-based-action-2)](https://paperswithcode.com/sota/unsupervised-skeleton-based-action-2?p=hyperbolic-self-paced-learning-for-self)
@@ -90,7 +92,7 @@ This project is based on the following open-source projects: [AimCLR](https://gi
 
 This project is licensed under the terms of the MIT license.
 
-## Citation
+## <a name="Citation"></a>Citation
 
 If you find this repository useful, please consider giving a star :star: and citation:
 
